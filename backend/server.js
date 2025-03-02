@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
 const dotenv = require('dotenv');
+const AuthRouter = require('./routes/AuthRouter');
 dotenv.config();
 
 app.use(cors());
@@ -15,14 +16,15 @@ mongoose.connect(MONGO_URI , {useNewUrlParser : true , useUnifiedTopology : true
 .catch((err)=>{ console.log(err); })
 
 
-
+app.use("/auth" , AuthRouter);
 
 app.listen(process.env.PORT, () => {
     console.log("server has started " , process.env.PORT);
 })
 
 app.get("/" , (req,res) => {
-    console.log("on home page");
+    console.log(" home page");
+    res.send("Welcome to Devsource API")
 })
 
 
